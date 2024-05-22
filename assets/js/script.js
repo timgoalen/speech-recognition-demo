@@ -1,16 +1,17 @@
-// -- GET HTML ELEMENTS --
-
-const mainBtn = document.getElementById("main-btn");
-const listeningAlertContainer = document.getElementById(
-  "listening-alert-container"
-);
-
 function initSpeechRecognition() {
+  // Get HTML elements.
+  const mainBtn = document.getElementById("main-btn");
+  const alertsContainer = document.getElementById("alerts-container");
+  const alerts = document.getElementById("alerts");
+
+  // Init variables.
   let recognising = false;
   let masterTranscript = "";
 
+  // Init Speech Recognition API.
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
+
   if (!SpeechRecognition) {
     alert(
       "Sorry, your browser does not support Speech Recognition. Try using Chrome or Safari."
@@ -20,11 +21,12 @@ function initSpeechRecognition() {
 
   const recognition = new SpeechRecognition();
 
-  // Recognition settings
-
+  // Recognition settings.
   recognition.continuous = true;
   recognition.interimResults = false;
   recognition.lang = "en-UK";
+
+  // Handle results.
   recognition.onresult = (event) => {
     let currentTranscript = "";
     for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -32,9 +34,13 @@ function initSpeechRecognition() {
     }
     masterTranscript += currentTranscript;
   };
+
+  // Handle errors.
   recognition.onerror = function (event) {
     console.error("Speech recognition error: " + event.error);
   };
+
+  // -- CLICK HANDLER --
 
   function handleMainBtnClick() {
     // Toggle the button text
@@ -42,16 +48,23 @@ function initSpeechRecognition() {
       ? (mainBtn.innerText = "Stop + Send")
       : (mainBtn.innerText = "Listen");
 
-    // Display "Listening.." in UI
-    listeningAlertContainer.classList.toggle("show-element");
+    // Display alerts in the UI
+    alertsContainer.classList.toggle("show-element");
+
+    // TODO:
+    // alerts.innerText === "Listening..." ? () : ();
 
     // Start/stop the Speech Recognition
     if (recognising) {
-      recognition.stop();
-      recognising = false;
-      console.log("Master:", masterTranscript);
-      console.log("Speech recognition stopped.");
-      masterTranscript = "";
+      console.log("...processing");
+      // Note: setTimeout is a temp workaround to allow the SpeechRecognition to finish transcribing before calling recognition.stop().
+      setTimeout(function () {
+        recognition.stop();
+        recognising = false;
+        console.log("Master transcript:", masterTranscript);
+        console.log("Speech recognition stopped.");
+        masterTranscript = "";
+      }, 3000);
     } else {
       recognition.start();
       recognising = true;
@@ -61,9 +74,5 @@ function initSpeechRecognition() {
 
   mainBtn.addEventListener("click", handleMainBtnClick);
 }
-
-// -- CLICK HANDLERS --
-
-// -- EVENT LISTENERS --
 
 window.onload = initSpeechRecognition;

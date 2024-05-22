@@ -15,14 +15,14 @@ button {
   text-align: center;
 }
 
-.listening-alert-container {
+.alerts-container {
   display: none;
   position: absolute;
   top: 0;
   width: 100%;
 }
 
-.listening-alert {
+.alert {
   color: red;
   text-align: center;
   padding-top: 3rem;
