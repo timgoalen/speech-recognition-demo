@@ -1,5 +1,8 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -12,6 +15,20 @@ button {
   text-align: center;
 }
 
+.listening-alert-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.listening-alert {
+  color: red;
+  text-align: center;
+  padding-top: 3rem;
+  font-size: 1.2rem;
+}
+
 .content-container {
   height: 100vh;
   height: 100dvh;
@@ -19,7 +36,7 @@ button {
   place-items: center;
 }
 
-.main-btn {
+#main-btn {
   padding: 2rem 3rem;
   font-size: 1.5rem;
   border-radius: 50px;
@@ -28,7 +45,11 @@ button {
   color: #1b1b1b;
 }
 
-.main-btn:hover {
+#main-btn:hover {
   color: black;
   box-shadow: 13px 13px 40px #c2c2c2, -13px -13px 40px #ffffff;
+}
+
+.show-element {
+  display: block;
 }

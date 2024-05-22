@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="assets/js/script.js" defer></script>
     <title>Speech Recognition Demo</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <section class="content-container">
-            <button class="main-btn">Listen</button>
-        </section>
+      <div id="listening-alert-container" class="listening-alert-container">
+        <div class="listening-alert">Listening...</div>
+      </div>
+
+      <section class="content-container">
+        <button id="main-btn">Listen</button>
+      </section>
     </main>
-</body>
+  </body>
 </html>
